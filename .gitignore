@@ -1,0 +1,5 @@
+# Ignore workspace layout and recent history
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
+**/.obsidian/cache/
+Dev Records/Private Notes/
