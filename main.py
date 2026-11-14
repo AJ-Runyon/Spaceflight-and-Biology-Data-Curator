@@ -25,9 +25,9 @@ def clean_bio_data(bio_data_all):
     return accession_urls
 
 # TODO: review and revise
-def save_urls_to_postgres(cleaned_urls):
+def save_urls_to_postgres(cleaned_url):
     # Convert dictionary into a list of tuples: [('OSD-1', 'https://...'), ...]
-    records = list(cleaned_urls.items())
+    records = list(cleaned_url.items())
 
     # Connect using context managers (automatically commits and closes)
     with psycopg.connect(DB_CONFIG) as conn:
@@ -69,14 +69,15 @@ def get_accession_metadata(cleaned_urls, user_input):
     response.raise_for_status()
     print(f"Successfully retrieved metadata for {key}")
     data = response.json()
-    print(data)
+    # print(data)
     return data
 
 
 
 if __name__ == "__main__":
     raw_data = get_bio_data_urls()
-    cleaned_urls= clean_bio_data(raw_data)
+    cleaned_urls = clean_bio_data(raw_data)
     target_url = input("Enter the target accession number: >")
-    save_urls_to_postgres(cleaned_urls)
-    get_accession_metadata(cleaned_urls, target_url)
+    acc_metadata = get_accession_metadata(cleaned_urls, target_url)
+    print(acc_metadata)
+    #save_urls_to_postgres(acc_metadata)
