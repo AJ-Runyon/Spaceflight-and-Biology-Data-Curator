@@ -1,10 +1,12 @@
 import requests
+import json
 import psycopg
 
 # Configuration variables
 BASE_URL = "https://visualization.osdr.nasa.gov/biodata/api/v2/datasets"
 # TODO Update with your actual PostgreSQL credentials and make sure information is not committed to Git
 DB_CONFIG = "dbname=osdr_db user=postgres password=your_password host=localhost port=5432"
+MISSIONS_LIST_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
 
 def script_logging():
     """
@@ -13,12 +15,22 @@ def script_logging():
     """
     pass
 
-def extract_mission_start_and_end_dates():
+def extract_mission_data_list():
     """
-    :input: target url(s) for the mission(s) data
-    :return: gathered messy data
+    :return: gathered messy data as a json
     """
-    pass
+    # Fetches the master list of all missions
+    response = requests.get(MISSIONS_LIST_URL, timeout=20)
+    response.raise_for_status()
+    missions_index = response.json()
+    print(f"{missions_index}")
+
+    # Saves the raw mission list locally to Json
+    with open("all_missions_index.json", "w", encoding="utf-8") as f:
+        json.dump(missions_index, f, indent=2)
+
+    print("Saved master missions index to all_missions_index.json")
+    return missions_index
 
 def transform_mission_data(mission_data):
     """
@@ -120,9 +132,10 @@ def get_accession_metadata(cleaned_urls, user_input):
 
 
 if __name__ == "__main__":
-    raw_data = get_bio_data_urls()
-    cleaned_urls = clean_bio_data(raw_data)
-    target_url = input("Enter the target accession number: >")
-    acc_metadata = get_accession_metadata(cleaned_urls, target_url)
-    print(acc_metadata)
+    #raw_data = get_bio_data_urls()
+    #cleaned_urls = clean_bio_data(raw_data)
+    #target_url = input("Enter the target accession number: >")
+    #acc_metadata = get_accession_metadata(cleaned_urls, target_url)
+    #print(acc_metadata)
+    extract_mission_data_list()
     #save_urls_to_postgres(acc_metadata)

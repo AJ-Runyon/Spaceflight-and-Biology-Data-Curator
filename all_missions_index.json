@@ -1,0 +1,502 @@
+{
+  "data": [
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-40"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Biosatellite%20II"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Biosatellite%20III"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%20782"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%20936"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%201129"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%201514"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%201667"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%201887"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%202044"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-47"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-65"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-42"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Cosmos%202229"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-46"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-48"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-52"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-54"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-56"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-57"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-58"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-59"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-60"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-62"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-63"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-66"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2017"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-32"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Skylab%203"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/OFO-A"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Gemini%2012"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Gemini%203"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Gemini%208"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-34"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-3"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-41"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-51F"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-51B"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-41B"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-29"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-8"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Mir%2019"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NASA%202"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NASA%203"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NASA%205"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-69"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-70"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Mir%2018"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-72"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-76"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-77"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-80"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-81"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-84"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-90"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-95"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Bion%2011"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-78"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-89"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-93"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-107"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/BSP"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-106"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NASA%204"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NASA%206"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-108"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-110"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-115"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%209"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Foton-M2"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-118"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2014"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Foton-M3"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%208"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-121"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Ground"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-123"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-130"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-131"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-129"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-126"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-132"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-133"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2016"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-135"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2025"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Bion_M1"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-111"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-2"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/OA-8"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-1"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-4"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-6"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-128"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/ARCBedrest"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-3"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-5"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Flight/ISS%20Inc%20TBD"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-9"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-8"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-10"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-11"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-13"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Rodent%20Research%20Project"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-12"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-14"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-15"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-16"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-18"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-12"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Eu:CROPIS"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-11"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-19"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-21"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-22"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-23"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STP-S26"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-14"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-15"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-24"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-17"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-25"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-26"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-28"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-27"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2042"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-100"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX%20Inspiration4"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20TMA-18M"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Unity%2022"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-20"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20TMA-2"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20TMA-3"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SJ-10"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Shenzhou-8"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-116"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2047"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Expedition%2048"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz_TMA-14"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-17"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-16"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/VSS%20Unity"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NS-12"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-29"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/UAVSAR"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Aero%20Science"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-31"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NG-20"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-64"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-68"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-85"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20MS-19"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2011"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2012"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2014"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2015"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2016"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Ax-1"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/CRS%20Orb-1"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Ax-3"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/NS-26"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/STS-122"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20TMA-16M"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Soyuz%20TMA-15M"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/SpaceX-30"
+    },
+    {
+      "mission": "https://osdr.nasa.gov/geode-py/ws/api/mission/Artemis%20II"
+    }
+  ]
+}
