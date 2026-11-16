@@ -1,174 +1,119 @@
-import requests
-import psycopg
+import os
+import re
 import json
+import requests
 from pathlib import Path
+from urllib.parse import unquote
 
-# Configuration variables
-BASE_URL = "https://visualization.osdr.nasa.gov/biodata/api/v2/datasets"
-# TODO Update with your actual PostgreSQL credentials and make sure information is not committed to Git
-DB_CONFIG = "dbname=osdr_db user=postgres password=your_password host=localhost port=5432"
-MISSIONS_LIST_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
+# Sets the location of the raw, transformed, and loaded data
+RAW_DIR = Path("data/raw_missions")
+CLEAN_DIR = Path("data/clean_missions")
+
+# Sets the files for raw and clean mission index JSONs
+INDEX_FILE = RAW_DIR / "all_missions_index.json"
+CLEAN_INDEX_FILE = CLEAN_DIR / "clean_missions_index.json"
+
+# Sets the API url for OSDR mission data
+MISSIONS_INDEX_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
+# Sets the delay for API requests
+# DELAY: float = 0.3
+
+
+# For politeness
 HEADERS = {
     "User-Agent": "Spaceflight-Biology-Data-Curator 0.0.1 (GitHub: AJ-Runyon)"
 }
-OUTPUT_FILE = Path("data/raw_missions/all_mission_details.json")
 
-def script_logging():
+# Clears the terminal for a clean look
+def clear_screen():
     """
-    :input:
-    :return:
+    Clears the terminal screen.
     """
-    pass
+    # 'cls' for Windows, 'clear' for macOS/Linux
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-# EXTRACT FUNCTIONS
+def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path = INDEX_FILE) -> Path:
+    """
+    Extracts a json of all the missions from OSDR with the API urls and their mission titles as messy data.
 
-def extract_mission_data_list():
+    :param index_url: The API URL for mission urls
+    :param output_path: The path to save the json
+    :return: The path of the saved the json
     """
-    :return: dictionary of mission urls
-    """
-    # Fetches the master list of all missions
-    response = requests.get(MISSIONS_LIST_URL, timeout=20)
+    # Ensures the folder exists for the output.
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    # Sends a GET request to the sever
+    response = requests.get(index_url, headers=HEADERS, timeout=20)
+    # For when the server returns a failure status code
     response.raise_for_status()
-    missions_index = response.json()
-    print(f"{missions_index}")
+    # Stores the data as a json
+    index_data = response.json()
+    # print(index_data)
+    # Attach the keys to the URL where the keys are the mission titles (uncleaned)
+    missions_map = {}
+    for entry in index_data.get("data", []):
+        mission_url = entry.get("mission")
+        if mission_url:
+            # Extracts the mission title from the end of the URL (e.g., "STS-135" or "SpaceX-12")
+            mission_title = mission_url.rstrip("/").split("/")[-1]
+            missions_map[mission_title] = mission_url
 
-    # Saves the raw mission list locally to Json
-    with open("all_missions_index.json", "w", encoding="utf-8") as f:
-        json.dump(missions_index, f, indent=2)
+    # Creates the output file
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(missions_map, f, indent=2)
+    return output_path
 
-    print("Saved master missions index to all_missions_index.json")
-    return missions_index
-
-# TRANSFORM FUNCTIONS
-
-def get_mission_api_urls(json_filepath: str | Path = "all_missions_index.json") -> list[str]:
+def transform_mission_index(input_path: Path = INDEX_FILE, output_path: Path = CLEAN_INDEX_FILE) -> Path:
     """
-    Takes in the master list of API Urls and outputs a clean list of mission urls.
+    Reads the raw mission index JSON, decodes URL-encoded characters,
+    normalizes whitespace in mission titles, and saves the cleaned JSON.
 
-    :param json_filepath: all_missions_index.json
-    :return: clean list of individual mission API URLs
+    :param input_path: The path to the raw mission index JSON
+    :param output_path: The path to save the cleaned JSON
+    :return: The path of the saved the cleaned JSON
     """
+    # Ensure the clean directory exists
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Read the raw JSON data from the file
+    with open(input_path, "r", encoding="utf-8") as f:
+        raw_missions = json.load(f)
 
-    with open(json_filepath, "r", encoding="utf-8") as f:
-        index_data = json.load(f)
+    cleaned_missions = {}
+    for raw_title, url in raw_missions.items():
+        # Decodes the URL encoding on the string key
+        decoded = unquote(raw_title)
+        # Replaces any underscores or multiple spaces with a single clean space
+        cleaned_title = re.sub(r"[_\s]+", " ", decoded).strip()
+        # sets the key name
+        cleaned_missions[cleaned_title] = url
 
-    # Unwraps the data key if the JSON is a dict, otherwise iterate the list directly
-    entries = index_data.get("data", []) if isinstance(index_data, dict) else index_data
+    # Save the cleaned dictionary to the clean index file
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(cleaned_missions, f, indent=2)
 
-    mission_urls = []
-    for entry in entries:
-        if isinstance(entry, dict):
-            # NASA GEODE stores the endpoint string under the "mission" key
-            url = entry.get("mission") or entry.get("REST_URL")
-            if url:
-                mission_urls.append(url)
-        elif isinstance(entry, str):
-            mission_urls.append(entry)
-
-    return mission_urls
-
-def transform_mission_data(mission_data):
-    """
-    :input: messy mission data
-    :return: cleaned and transformed data
-    """
-    pass
-
-def save_to_mission_dataset():
-    """
-    :input: raw data
-    :return: json of the raw data
-    """
-    pass
-
-
-def load_to_mission_dataset():
-    """
-    :input: transformed mission data
-    :return: loaded dataset into the relational database for mission data
-    """
-    pass
-
-def sql_quering():
-    """
-    :input: Takes in SQL commands
-    :return: outputs the retrived data from the mission database
-    """
-    pass
-
-
-
-def get_bio_data_urls():
-    # Request JSON format instead of the HTML browser view
-    all_datasets_url = f"{BASE_URL}/?format=json"
-    response = requests.get(all_datasets_url)
-    response.raise_for_status()  # Raises an error if the request failed
-    print("Successfully retrieved data")
-    bio_data_all = response.json()
-    return bio_data_all
-
-def clean_bio_data(bio_data_all):
-    # Flattens the data so it can be used easer later.
-    accession_urls = {
-        accession: details["REST_URL"]
-        for accession, details in bio_data_all.items()
-    }
-    print("Successfully cleaned accession urls")
-    return accession_urls
-
-
-def save_urls_to_postgres(cleaned_url):
-    # Convert dictionary into a list of tuples: [('OSD-1', 'https://...'), ...]
-    records = list(cleaned_url.items())
-
-    # Connect using context managers (automatically commits and closes)
-    with psycopg.connect(DB_CONFIG) as conn:
-        with conn.cursor() as cur:
-            # 1. Create the table if it doesn't exist yet
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS datasets (
-                    accession VARCHAR(20) PRIMARY KEY,
-                    rest_url TEXT NOT NULL,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-            """)
-
-            # 2. Bulk insert or update existing records
-            cur.executemany("""
-                INSERT INTO datasets (accession, rest_url)
-                VALUES (%s, %s)
-                ON CONFLICT (accession) 
-                DO UPDATE SET 
-                    rest_url = EXCLUDED.rest_url,
-                    updated_at = CURRENT_TIMESTAMP;
-            """, records)
-
-    print(f"Successfully saved {len(records)} datasets to PostgreSQL.")
-
-def get_accession_metadata(cleaned_urls, user_input):
-    # Normalize input so both "1" and "OSD-1" work
-    key = user_input.strip().upper()
-    if not key.startswith("OSD-"):
-        key = f"OSD-{key}"
-
-    # Look up the exact REST_URL from your cleaned dictionary
-    url = cleaned_urls.get(key)
-    if not url:
-        print(f"Error: {key} was not found in the dataset list.")
-        return None
-
-    response = requests.get(url)
-    response.raise_for_status()
-    print(f"Successfully retrieved metadata for {key}")
-    data = response.json()
-    # print(data)
-    return data
-
-
+    return output_path
 
 if __name__ == "__main__":
-    extract_mission_data_list()
-    urls = get_mission_api_urls("all_missions_index.json")
-    print(f"Extracted {len(urls)} mission URLs.")
-    print("First 5 URLs:", urls[:5])
+    print("Terminal is active.")
+
+    try:
+        while True:
+            print("What would you like to do?:\n\n  1. Initialize the ETL Pipeline\n  2. Query the Database\n  3. exit\n\n")
+            user_input = input("Enter your choice: >").strip().lower()
+            if user_input == "1":
+                mission_api_urls = extract_master_list()
+                print(mission_api_urls)
+                clean_file_path = transform_mission_index(mission_api_urls)
+                print(clean_file_path)
+            elif user_input == "2":
+                print("Database query not implemented yet.")
+            elif user_input == "3":
+                print("Exiting...")
+                break
+            else:
+                print("Invalid input. Please enter '1' or '2' or '3'.")
+
+    except (KeyboardInterrupt, EOFError):
+        clear_screen()
+        print("Exiting...")
