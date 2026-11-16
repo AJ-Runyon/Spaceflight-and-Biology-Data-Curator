@@ -1,12 +1,17 @@
 import requests
-import json
 import psycopg
+import json
+from pathlib import Path
 
 # Configuration variables
 BASE_URL = "https://visualization.osdr.nasa.gov/biodata/api/v2/datasets"
 # TODO Update with your actual PostgreSQL credentials and make sure information is not committed to Git
 DB_CONFIG = "dbname=osdr_db user=postgres password=your_password host=localhost port=5432"
 MISSIONS_LIST_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
+HEADERS = {
+    "User-Agent": "Spaceflight-Biology-Data-Curator 0.0.1 (GitHub: AJ-Runyon)"
+}
+OUTPUT_FILE = Path("data/raw_missions/all_mission_details.json")
 
 def script_logging():
     """
@@ -14,6 +19,8 @@ def script_logging():
     :return:
     """
     pass
+
+# EXTRACT FUNCTIONS
 
 def extract_mission_data_list():
     """
@@ -31,6 +38,35 @@ def extract_mission_data_list():
 
     print("Saved master missions index to all_missions_index.json")
     return missions_index
+
+# TRANSFORM FUNCTIONS
+
+def get_mission_api_urls(json_filepath: str | Path = "all_missions_index.json") -> list[str]:
+    """
+    Takes in the master list of API Urls and outputs a clean list of mission urls.
+
+    :param json_filepath: all_missions_index.json
+    :return: clean list of individual mission API URLs
+    """
+
+
+    with open(json_filepath, "r", encoding="utf-8") as f:
+        index_data = json.load(f)
+
+    # Unwraps the data key if the JSON is a dict, otherwise iterate the list directly
+    entries = index_data.get("data", []) if isinstance(index_data, dict) else index_data
+
+    mission_urls = []
+    for entry in entries:
+        if isinstance(entry, dict):
+            # NASA GEODE stores the endpoint string under the "mission" key
+            url = entry.get("mission") or entry.get("REST_URL")
+            if url:
+                mission_urls.append(url)
+        elif isinstance(entry, str):
+            mission_urls.append(entry)
+
+    return mission_urls
 
 def transform_mission_data(mission_data):
     """
@@ -132,10 +168,7 @@ def get_accession_metadata(cleaned_urls, user_input):
 
 
 if __name__ == "__main__":
-    #raw_data = get_bio_data_urls()
-    #cleaned_urls = clean_bio_data(raw_data)
-    #target_url = input("Enter the target accession number: >")
-    #acc_metadata = get_accession_metadata(cleaned_urls, target_url)
-    #print(acc_metadata)
     extract_mission_data_list()
-    #save_urls_to_postgres(acc_metadata)
+    urls = get_mission_api_urls("all_missions_index.json")
+    print(f"Extracted {len(urls)} mission URLs.")
+    print("First 5 URLs:", urls[:5])
