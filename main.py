@@ -17,7 +17,7 @@ def script_logging():
 
 def extract_mission_data_list():
     """
-    :return: gathered messy data as a json
+    :return: dictionary of mission urls
     """
     # Fetches the master list of all missions
     response = requests.get(MISSIONS_LIST_URL, timeout=20)
