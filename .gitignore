@@ -1,5 +1,7 @@
-# Ignore workspace layout and recent history
+# Git ingnore these
 **/.obsidian/workspace.json
 **/.obsidian/workspace-mobile.json
 **/.obsidian/cache/
 Dev Records/Private Notes/
+AI Code Testing.py
+.env

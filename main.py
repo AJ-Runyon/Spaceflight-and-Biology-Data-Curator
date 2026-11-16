@@ -6,6 +6,51 @@ BASE_URL = "https://visualization.osdr.nasa.gov/biodata/api/v2/datasets"
 # TODO Update with your actual PostgreSQL credentials and make sure information is not committed to Git
 DB_CONFIG = "dbname=osdr_db user=postgres password=your_password host=localhost port=5432"
 
+def script_logging():
+    """
+    :input:
+    :return:
+    """
+    pass
+
+def extract_mission_start_and_end_dates():
+    """
+    :input: target url(s) for the mission(s) data
+    :return: gathered messy data
+    """
+    pass
+
+def transform_mission_data(mission_data):
+    """
+    :input: messy mission data
+    :return: cleaned and transformed data
+    """
+    pass
+
+def save_to_mission_dataset():
+    """
+    :input: raw data
+    :return: json of the raw data
+    """
+    pass
+
+
+def load_to_mission_dataset():
+    """
+    :input: transformed mission data
+    :return: loaded dataset into the relational database for mission data
+    """
+    pass
+
+def sql_quering():
+    """
+    :input: Takes in SQL commands
+    :return: outputs the retrived data from the mission database
+    """
+    pass
+
+
+
 def get_bio_data_urls():
     # Request JSON format instead of the HTML browser view
     all_datasets_url = f"{BASE_URL}/?format=json"
@@ -24,7 +69,7 @@ def clean_bio_data(bio_data_all):
     print("Successfully cleaned accession urls")
     return accession_urls
 
-# TODO: review and revise
+
 def save_urls_to_postgres(cleaned_url):
     # Convert dictionary into a list of tuples: [('OSD-1', 'https://...'), ...]
     records = list(cleaned_url.items())
