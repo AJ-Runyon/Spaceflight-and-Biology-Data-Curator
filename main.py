@@ -2,8 +2,10 @@ import os
 import re
 import json
 import requests
+import psycopg
 from pathlib import Path
 from urllib.parse import unquote
+
 
 # Sets the location of the raw, transformed, and loaded data
 RAW_DIR = Path("data/raw_missions")
@@ -93,6 +95,8 @@ def transform_mission_index(input_path: Path = INDEX_FILE, output_path: Path = C
         json.dump(cleaned_missions, f, indent=2)
 
     return output_path
+
+
 
 if __name__ == "__main__":
     print("Terminal is active.")
