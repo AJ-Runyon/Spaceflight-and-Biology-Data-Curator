@@ -2,6 +2,8 @@ import os
 import re
 import json
 import requests
+import sys
+import signal
 from pathlib import Path
 from urllib.parse import unquote
 from db import verify_connection, get_connection_info
@@ -25,6 +27,19 @@ MISSIONS_INDEX_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
 HEADERS = {
     "User-Agent": "Spaceflight-Biology-Data-Curator 0.0.1 (GitHub: AJ-Runyon)"
 }
+
+#TODO add logging function
+
+def initialize_pipeline():
+    """Starts up the ETL pipeline."""
+    print("Starting OSDR ETL pipeline..")
+    # TODO create and wire in extraction module.
+    mission_api_urls = extract_master_list()
+    print(mission_api_urls)
+    # TODO create and wire in transom module.
+    clean_file_path = transform_mission_index(mission_api_urls)
+    print(clean_file_path)
+    # TODO create and wire in the load module.
 
 # Clears the terminal for a clean look
 def clear_screen():
@@ -97,7 +112,6 @@ def transform_mission_index(input_path: Path = INDEX_FILE, output_path: Path = C
     return output_path
 
 def main():
-    print("Terminal is active.")
     running = True
 
     try:
@@ -106,15 +120,18 @@ def main():
                 "What would you like to do?:\n\n  1. Initialize the ETL Pipeline\n  2. Query the Database\n  3. exit\n\n")
             user_input = input("Enter your choice: >").strip().lower()
             if user_input == "1":
-                mission_api_urls = extract_master_list()
-                print(mission_api_urls)
-                clean_file_path = transform_mission_index(mission_api_urls)
-                print(clean_file_path)
+                #  Checks the connection before running network or disk operations
+                if not verify_connection():
+                    print("Aborting program: database is unreachable.")
+                    sys.exit(1)
+                # Starts up the pipeline
+                initialize_pipeline()
             elif user_input == "2":
-                print("Database query not implemented yet.")
+                print("Database querying not implemented yet.")
             elif user_input == "3":
                 print("Exiting...")
-                break
+                running = False
+                sys.exit(0)
             else:
                 print("Invalid input. Please enter '1' or '2' or '3'.")
 
