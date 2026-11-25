@@ -4,7 +4,7 @@ import json
 import requests
 from pathlib import Path
 from urllib.parse import unquote
-from test_db import verify_connection, get_connection_info
+from db import verify_connection, get_connection_info
 
 
 # Sets the location of the raw, transformed, and loaded data
