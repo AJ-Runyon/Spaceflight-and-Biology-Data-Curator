@@ -5,6 +5,7 @@ import requests
 import config
 import json
 from pathlib import Path
+import pandas as pd
 
 
 def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path: Path = config.INDEX_FILE) -> Path:
@@ -36,4 +37,10 @@ def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path:
     # Creates the output file
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(missions_map, f, indent=2)
-    return output_path
+
+    index_df = pd.DataFrame.from_dict(missions_map, orient='index')
+    #print(index_df)
+    return output_path,index_df
+
+if __name__ == "__main__":
+    extract_master_list()

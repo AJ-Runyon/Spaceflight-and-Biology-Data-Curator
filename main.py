@@ -10,12 +10,12 @@ def initialize_pipeline():
     clear_screen()
     print("Starting ETL pipeline..")
     mission_api_urls = extract_master_list()
-    # TODO create and wire in transform module.
     clean_file_path = transform_mission_index(mission_api_urls)
     print(f"{clean_file_path}")
     # TODO create and wire in the load module.
 
 def main():
+    """Starts up the program loop."""
     running = True
 
     try:
