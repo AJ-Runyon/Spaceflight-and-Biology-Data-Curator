@@ -1,4 +1,5 @@
 import os
+import subprocess
 import re
 import json
 import requests
@@ -46,8 +47,7 @@ def clear_screen():
     """
     Clears the terminal screen.
     """
-    # 'cls' for Windows, 'clear' for macOS/Linux
-    os.system('cls' if os.name == 'nt' else 'clear')
+    subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path = INDEX_FILE) -> Path:
     """
