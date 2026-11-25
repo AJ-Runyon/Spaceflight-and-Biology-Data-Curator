@@ -1,14 +1,11 @@
-import os
-import subprocess
 import re
 import json
 import requests
 import sys
-import signal
 from pathlib import Path
 from urllib.parse import unquote
 from db import verify_connection, get_connection_info
-
+from utilities import clear_screen
 
 # Sets the location of the raw, transformed, and loaded data
 RAW_DIR = Path("data/raw_missions")
@@ -33,6 +30,7 @@ HEADERS = {
 
 def initialize_pipeline():
     """Starts up the ETL pipeline."""
+    clear_screen()
     print("Starting OSDR ETL pipeline..")
     # TODO create and wire in extraction module.
     mission_api_urls = extract_master_list()
@@ -41,13 +39,6 @@ def initialize_pipeline():
     clean_file_path = transform_mission_index(mission_api_urls)
     print(clean_file_path)
     # TODO create and wire in the load module.
-
-# Clears the terminal for a clean look
-def clear_screen():
-    """
-    Clears the terminal screen.
-    """
-    subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path = INDEX_FILE) -> Path:
     """
@@ -120,6 +111,7 @@ def main():
                 "What would you like to do?:\n\n  1. Initialize the ETL Pipeline\n  2. Query the Database\n  3. exit\n\n")
             user_input = input("Enter your choice: >").strip().lower()
             if user_input == "1":
+                clear_screen()
                 #  Checks the connection before running network or disk operations
                 if not verify_connection():
                     print("Aborting program: database is unreachable.")
@@ -127,12 +119,15 @@ def main():
                 # Starts up the pipeline
                 initialize_pipeline()
             elif user_input == "2":
+                clear_screen()
                 print("Database querying not implemented yet.")
             elif user_input == "3":
+                clear_screen()
                 print("Exiting...")
                 running = False
                 sys.exit(0)
             else:
+                clear_screen()
                 print("Invalid input. Please enter '1' or '2' or '3'.")
 
     except (KeyboardInterrupt, EOFError):
