@@ -10,4 +10,4 @@ __pycache__/
 # JetBrains IDEs (PyCharm)
 .idea/
 
-.data/
+/data/
