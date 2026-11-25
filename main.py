@@ -2,7 +2,6 @@ import os
 import re
 import json
 import requests
-import psycopg
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -96,14 +95,14 @@ def transform_mission_index(input_path: Path = INDEX_FILE, output_path: Path = C
 
     return output_path
 
-
-
-if __name__ == "__main__":
+def main():
     print("Terminal is active.")
+    running = True
 
     try:
-        while True:
-            print("What would you like to do?:\n\n  1. Initialize the ETL Pipeline\n  2. Query the Database\n  3. exit\n\n")
+        while running:
+            print(
+                "What would you like to do?:\n\n  1. Initialize the ETL Pipeline\n  2. Query the Database\n  3. exit\n\n")
             user_input = input("Enter your choice: >").strip().lower()
             if user_input == "1":
                 mission_api_urls = extract_master_list()
@@ -121,3 +120,8 @@ if __name__ == "__main__":
     except (KeyboardInterrupt, EOFError):
         clear_screen()
         print("Exiting...")
+
+
+
+if __name__ == "__main__":
+    main()
