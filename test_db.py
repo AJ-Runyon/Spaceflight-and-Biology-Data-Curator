@@ -5,19 +5,12 @@ import os
 import psycopg
 from dotenv import load_dotenv
 
-# loads the credentials from  the .env file
-load_dotenv()
-
-conn_info = (
-    f"host={os.getenv('DB_HOST')} "
-    f"port={os.getenv('DB_PORT')} "
-    f"dbname={os.getenv('DB_NAME')} "
-    f"user={os.getenv('DB_USER')} "
-    f"password={os.getenv('DB_PASSWORD')}"
-)
-
-def verify_connection():
+def verify_connection()-> bool:
+    """
+    :return: Returns True if the connection to the database succeeded, False otherwise.
+    """
     try:
+        conn_info = get_connection_info()
         # Automatically closes the connection
         with psycopg.connect(conn_info) as conn:
             # Automatically commits transactions if no errors occur
@@ -43,10 +36,23 @@ def verify_connection():
                 row_id = cur.fetchone()[0]
                 # Makes sure the things function as indented
                 print(f"Write test passed (inserted row ID: {row_id}).")
+                return True
 
     # In case something goes wrong
     except psycopg.OperationalError as e:
         print(f"Connection failed. Check that the PostgreSQL Windows service is running and .env credentials match.\nError: {e}")
+        return False
 
-if __name__ == "__main__":
-    verify_connection()
+def get_connection_info()-> str:
+    """
+    :return: Outputs the connection info located within the .env file as a dictionary of strings.
+    """
+    # loads the credentials from  the .env file
+    load_dotenv()
+    return (
+        f"host={os.getenv('DB_HOST')} "
+        f"port={os.getenv('DB_PORT')} "
+        f"dbname={os.getenv('DB_NAME')} "
+        f"user={os.getenv('DB_USER')} "
+        f"password={os.getenv('DB_PASSWORD')}"
+    )
