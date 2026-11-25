@@ -1,6 +1,13 @@
+"""
+extraction.py - Contains the extraction functions for the program.
+"""
+import requests
+import config
+import json
+from pathlib import Path
 
 
-def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path = INDEX_FILE) -> Path:
+def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path: Path = config.INDEX_FILE) -> Path:
     """
     Extracts a json of all the missions from OSDR with the API urls and their mission titles as messy data.
 
@@ -11,7 +18,7 @@ def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path =
     # Ensures the folder exists for the output.
     output_path.parent.mkdir(parents=True, exist_ok=True)
     # Sends a GET request to the sever
-    response = requests.get(index_url, headers=HEADERS, timeout=20)
+    response = requests.get(index_url, headers=config.HEADERS, timeout=20)
     # For when the server returns a failure status code
     response.raise_for_status()
     # Stores the data as a json

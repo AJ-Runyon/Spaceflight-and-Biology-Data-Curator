@@ -7,51 +7,20 @@ from urllib.parse import unquote
 from db import verify_connection
 from utilities import clear_screen
 import config
+from pipeline import extract_master_list
 
 #TODO add logging function
 
 def initialize_pipeline():
     """Starts up the ETL pipeline."""
     clear_screen()
-    print("Starting OSDR ETL pipeline..")
-    # TODO create and wire in extraction module.
+    print("Starting ETL pipeline..")
     mission_api_urls = extract_master_list()
-    print(mission_api_urls)
-    # TODO create and wire in transom module.
+    # TODO create and wire in transform module.
     clean_file_path = transform_mission_index(mission_api_urls)
     print(clean_file_path)
     # TODO create and wire in the load module.
 
-def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path: Path = config.INDEX_FILE) -> Path:
-    """
-    Extracts a json of all the missions from OSDR with the API urls and their mission titles as messy data.
-
-    :param index_url: The API URL for mission urls
-    :param output_path: The path to save the json
-    :return: The path of the saved the json
-    """
-    # Ensures the folder exists for the output.
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    # Sends a GET request to the sever
-    response = requests.get(index_url, headers=config.HEADERS, timeout=20)
-    # For when the server returns a failure status code
-    response.raise_for_status()
-    # Stores the data as a json
-    index_data = response.json()
-    # print(index_data)
-    # Attach the keys to the URL where the keys are the mission titles (uncleaned)
-    missions_map = {}
-    for entry in index_data.get("data", []):
-        mission_url = entry.get("mission")
-        if mission_url:
-            # Extracts the mission title from the end of the URL (e.g., "STS-135" or "SpaceX-12")
-            mission_title = mission_url.rstrip("/").split("/")[-1]
-            missions_map[mission_title] = mission_url
-
-    # Creates the output file
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(missions_map, f, indent=2)
-    return output_path
 
 def transform_mission_index(input_path: Path = config.INDEX_FILE, output_path: Path = config.CLEAN_INDEX_FILE) -> Path:
     """
