@@ -4,27 +4,9 @@ import requests
 import sys
 from pathlib import Path
 from urllib.parse import unquote
-from db import verify_connection, get_connection_info
+from db import verify_connection
 from utilities import clear_screen
-
-# Sets the location of the raw, transformed, and loaded data
-RAW_DIR = Path("data/raw_missions")
-CLEAN_DIR = Path("data/clean_missions")
-
-# Sets the files for raw and clean mission index JSONs
-INDEX_FILE = RAW_DIR / "all_missions_index.json"
-CLEAN_INDEX_FILE = CLEAN_DIR / "clean_missions_index.json"
-
-# Sets the API url for OSDR mission data
-MISSIONS_INDEX_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
-# Sets the delay for API requests
-# DELAY: float = 0.3
-
-
-# For politeness
-HEADERS = {
-    "User-Agent": "Spaceflight-Biology-Data-Curator 0.0.1 (GitHub: AJ-Runyon)"
-}
+import config
 
 #TODO add logging function
 
@@ -40,7 +22,7 @@ def initialize_pipeline():
     print(clean_file_path)
     # TODO create and wire in the load module.
 
-def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path = INDEX_FILE) -> Path:
+def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path: Path = config.INDEX_FILE) -> Path:
     """
     Extracts a json of all the missions from OSDR with the API urls and their mission titles as messy data.
 
@@ -51,7 +33,7 @@ def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path =
     # Ensures the folder exists for the output.
     output_path.parent.mkdir(parents=True, exist_ok=True)
     # Sends a GET request to the sever
-    response = requests.get(index_url, headers=HEADERS, timeout=20)
+    response = requests.get(index_url, headers=config.HEADERS, timeout=20)
     # For when the server returns a failure status code
     response.raise_for_status()
     # Stores the data as a json
@@ -71,7 +53,7 @@ def extract_master_list(index_url: str = MISSIONS_INDEX_URL, output_path: Path =
         json.dump(missions_map, f, indent=2)
     return output_path
 
-def transform_mission_index(input_path: Path = INDEX_FILE, output_path: Path = CLEAN_INDEX_FILE) -> Path:
+def transform_mission_index(input_path: Path = config.INDEX_FILE, output_path: Path = config.CLEAN_INDEX_FILE) -> Path:
     """
     Reads the raw mission index JSON, decodes URL-encoded characters,
     normalizes whitespace in mission titles, and saves the cleaned JSON.
