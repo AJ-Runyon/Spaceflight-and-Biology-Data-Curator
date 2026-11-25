@@ -38,9 +38,9 @@ def extract_master_list(index_url: str = config.MISSIONS_INDEX_URL, output_path:
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(missions_map, f, indent=2)
 
+    # stores the dictionary keys as row labels
     index_df = pd.DataFrame.from_dict(missions_map, orient='index')
+    # Moves the keys into regular columns
+    index_df = index_df.reset_index().rename(columns={'index': 'Mission Title', 0: 'API URL'})
     #print(index_df)
-    return output_path,index_df
-
-if __name__ == "__main__":
-    extract_master_list()
+    return output_path, index_df

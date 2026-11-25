@@ -1,8 +1,9 @@
 import config
-from pathlib import Path
+import pandas as pd
 import json
-from urllib.parse import unquote
 import re
+from pathlib import Path
+from urllib.parse import unquote
 
 def transform_mission_index(input_path: Path = config.INDEX_FILE, output_path: Path = config.CLEAN_INDEX_FILE) -> Path:
     """
@@ -34,3 +35,19 @@ def transform_mission_index(input_path: Path = config.INDEX_FILE, output_path: P
         json.dump(cleaned_missions, f, indent=2)
 
     return output_path
+
+def transform_mission_index_df(mission_index_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Transforms the raw mission index DataFrame into a cleaned mission index DataFrame.
+    :param mission_index_df: The raw mission index DataFrame
+    :return: the cleaned mission index DataFrame
+    """
+    # Copies the dataframe
+    df = mission_index_df.copy()
+
+    # Decodes the URL encoding and clean whitespace and underscores
+    df['Mission Title'] = df['Mission Title'].apply(
+        lambda x: re.sub(r"[_\s]+", " ", unquote(str(x))).strip()
+    )
+
+    return df

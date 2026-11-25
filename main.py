@@ -9,7 +9,13 @@ def initialize_pipeline():
     """Starts up the ETL pipeline."""
     clear_screen()
     print("Starting ETL pipeline..")
-    mission_api_urls = extract_master_list()
+    # Grabs only the dataframe
+    _, mission_df = extract_master_list()
+    # Grabs only the dictionary
+    mission_api_urls, _ = extract_master_list()
+    #print(f"{mission_df}")
+    # TODO finish this function
+    transform_mission_index_df(mission_df)
     clean_file_path = transform_mission_index(mission_api_urls)
     print(f"{clean_file_path}")
     # TODO create and wire in the load module.
