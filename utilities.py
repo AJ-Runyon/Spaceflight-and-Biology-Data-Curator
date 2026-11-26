@@ -13,45 +13,55 @@ def clear_screen():
     """
     subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
-def inti_logger(log_message: str,  filename: str = "Program_log.json", level="INFO", time_precision: str = "seconds"):
+def inti_logger(log_message: str, filename: str | Path = "Program_log.json", level: str = "INFO", time_precision: str = "seconds",
+):
     """
-        Initializes a logger function for the program. Outputs a log entry within a json file.
+    Appends a structured log entry to a JSON file, creating the file if it does not exist.
 
-        :param log_message: the message to log
-        :param filename: the name of the json log file
-        :param level: the logging level
-        :param time_precision: the time precision to use. Defaults to 'seconds'.
+    :param log_message: the message to log
+    :param filename: the name or path of the json log file
+    :param level: the logging level
+    :param time_precision: the time precision to use. Defaults to 'seconds'.
     """
-    # Get the current date and time in  ISO 8601: YYYY-MM-DDTHH:mm:ss
+    file_path = Path(filename)
+
+    # Get the current date and time in UTC ISO 8601 format
     now = datetime.now(timezone.utc)
-
-    # controls the time stamp precision in the log entry
-    time_precision = time_precision
-
-    # sets time stamp
     time_stamp = now.isoformat(timespec=time_precision)
 
-    # Reads the number of existing entries
-    with open(filename, "r", encoding="utf-8") as file:
-        entries = json.load(file)
+    # Load existing entries if the file exists and contains valid JSON
+    entries = []
+    if file_path.exists():
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                loaded_data = json.load(file)
+                if isinstance(loaded_data, list):
+                    entries = loaded_data
+        except json.JSONDecodeError:
+            entries = []
 
     # Get the highest existing ID (defaults to 0 if the file is empty)
-    highest_id = max((entry["id"] for entry in entries), default=0)
+    highest_id = max((entry.get("id", 0) for entry in entries), default=0)
 
-    # increase the entry number for the log file
+    # Increases the id value for later entries
     next_id = highest_id + 1
 
-    # Formats the log entry
-    testing_entry = {
+    # Format and append the new log entry
+    new_entry = {
         "id": next_id,
         "time": time_stamp,
         "level": level,
         "message": log_message,
     }
+    # Adds the log to the list
+    entries.append(new_entry)
 
-    # writes the log message to the file
-    with open(filename, "a", encoding="utf-8") as file:
-        json.dump(testing_entry, file, indent=4)
+    # Ensure parent directories exist and write the full updated list
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Writes the entries to the log file
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(entries, file, indent=4, ensure_ascii=False)
 
 def verify_directory(path: str | Path) -> str:
     """

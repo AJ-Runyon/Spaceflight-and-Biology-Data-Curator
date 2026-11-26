@@ -9,7 +9,8 @@ def initialize_pipeline():
     clear_screen()
     if not(os.path.exists(LOG_FILE_PATH)):
         inti_logger("Initializing Program for the first time.", LOG_FILE_PATH, "INFO")
-    inti_logger("Initializing Program.", LOG_FILE_PATH, "INFO")
+    else:
+        inti_logger("Initializing Program.", LOG_FILE_PATH, "INFO")
     # Grabs only the dataframe
     _, mission_df = extract_master_list()
     # Grabs only the dictionary

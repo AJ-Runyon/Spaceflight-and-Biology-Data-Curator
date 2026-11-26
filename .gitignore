@@ -11,3 +11,5 @@ __pycache__/
 .idea/
 
 /data/
+
+Log.json
