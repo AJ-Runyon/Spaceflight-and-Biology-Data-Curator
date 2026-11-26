@@ -1,21 +1,22 @@
 import sys
 from db import verify_connection
-from utilities import clear_screen
+from utilities import *
 from pipeline import *
-
-#TODO add logging function
+from config import *
 
 def initialize_pipeline():
     """Starts up the ETL pipeline."""
     clear_screen()
-    print("Starting ETL pipeline..")
+    if not(os.path.exists(LOG_FILE_PATH)):
+        inti_logger("Initializing Program for the first time.", LOG_FILE_PATH, "INFO")
+    inti_logger("Initializing Program.", LOG_FILE_PATH, "INFO")
     # Grabs only the dataframe
     _, mission_df = extract_master_list()
     # Grabs only the dictionary
     mission_api_urls, _ = extract_master_list()
     #print(f"{mission_df}")
     # TODO finish this function
-    mission_df = transform_mission_index_df(mission_df)
+    #mission_df = transform_mission_index_df(mission_df)
     clean_file_path = transform_mission_index(mission_api_urls)
     print(f"{clean_file_path}")
     # TODO create and wire in the load module.

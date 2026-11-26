@@ -16,6 +16,8 @@ MISSIONS_INDEX_URL = "https://osdr.nasa.gov/geode-py/ws/api/missions"
 # Sets the delay for API requests
 # DELAY: float = 0.3
 
+LOG_FILE_PATH = "Log.json"
+
 # For politeness
 HEADERS = {
     "User-Agent": "Spaceflight-Biology-Data-Curator 0.0.1 (GitHub: AJ-Runyon)"
